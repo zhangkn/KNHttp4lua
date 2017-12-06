@@ -124,13 +124,41 @@ function httpPost( http_url , content_type , http_body  )
 		source = ltn12.source.string(http_body),  
 		sink = ltn12.sink.table(response_body),  
 	}
-    
+    decode3 = {};
     --notifyMessage("res is:"..res);
     sysLog("《httpPost end 》");
     if(not(res == nil)) then
         sysLog("res:"..res);
+        
+    else
+    --code： timeout
+    res= "";
+    sysLog("code： "..code);
+    
+    --输出返回的信息到特定文件
+    
+    -- 以附加的方式打开只写文件
+    file = io.open("/var/root/lualog.text", "a")
+    -- 在文件最后一行添加 Lua 注释
+    -- 设置默认输出文件为 test.lua
+    io.output(file)
+    
+    if type(response_body) == "table" then
+        file:write("--res:"..res.." code:"..code.." response_body:"..table.concat(response_body).."\n")
+        else
+        file:write("--res:"..res.." code:"..code.." response_body[1]:"..type(response_body).."\n")
+    end
+    
+    -- 关闭打开的文件
+    file:close()
+
+    return res,code,decode3
+    
     end
     sysLog("code： "..code);
+    
+    
+    
     sysLog("Response body:")
     if type(response_body) == "table" then
         sysLog("《"..table.concat(response_body).."》")
@@ -138,7 +166,12 @@ function httpPost( http_url , content_type , http_body  )
         sysLog("Not a table:", type(response_body))
     end
     
-    decode3 = json.decode( response_body[1] )--第一个元素是string
+    
+    if (not(response_body[1] == nil)) then
+        decode3 = json.decode( response_body[1] )--第一个元素是string
+      
+     end
+        
     
 	return res,code,decode3
 end
