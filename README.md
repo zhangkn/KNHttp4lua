@@ -1,6 +1,8 @@
 
+ 封装http请求 `httpPostJson请求上报数据`
+# 使用方法
 
-# 上报数据
+- 通过封装的 httpPostJson请求上报数据
 ```lua
 
 function KNreport(report)
