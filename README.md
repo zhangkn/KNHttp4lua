@@ -1,4 +1,8 @@
-# KNHttp4lua
+
+
+# KNreport
+```lua
+
 function KNreport(report)
     
     if not(type(report) == "table") then
@@ -26,3 +30,4 @@ function KNreport(report)
     
     
 end
+```
