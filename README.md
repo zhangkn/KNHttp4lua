@@ -1,5 +1,5 @@
 
- 封装http请求 `httpPostJson请求上报数据`
+ 封装http请求 `httpPostJson
 # 使用方法
 
 - 通过封装的 httpPostJson请求上报数据
