@@ -1,6 +1,6 @@
 
 
-# KNreport
+# 上报数据
 ```lua
 
 function KNreport(report)
